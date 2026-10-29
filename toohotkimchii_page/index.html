@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김남용 | 포트폴리오</title>
+
+  <!-- 글꼴: 둥글고 귀여운 제목용(Jua) + 읽기 편한 본문용(Noto Sans KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- 디자인(CSS)은 style.css 파일에 따로 작성했습니다. -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       1. header : 사이트 맨 위 (로고 + 메뉴 + 검색창)
+       ===================================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#home" class="logo">김남용<span class="logo-dot">.</span></a>
+
+      <!-- nav : 페이지 안의 각 영역(section)으로 이동하는 메뉴 -->
+      <nav class="main-nav">
+        <a href="#about">About</a>
+        <a href="#projects">Portfolio</a>
+        <a href="#process">제작 과정</a>
+        <a href="#contact" class="nav-order">Contact</a>
+      </nav>
+    </div>
+
+    <!-- 검색창 (입력하면 아래 프로젝트 카드가 걸러집니다) -->
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="text" id="searchInput" placeholder="프로젝트를 검색해 보세요" />
+    </div>
+  </header>
+
+  <!-- =====================================================
+       2. main : 본문 내용
+       ===================================================== -->
+  <main>
+
+    <!-- 2-1. 메인 배너 + 자기소개 문구 바꾸기 버튼 -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <p class="hero-badge">Kwangwoon Univ. Software 22</p>
+        <h1>안녕하세요,<br /><em>김남용</em>입니다.</h1>
+
+        <!-- 버튼을 누르면 이 문장이 바뀝니다 (script.js 참고) -->
+        <p id="introText" class="intro-text">
+          광운대학교 소프트웨어학부에 재학 중인 김남용입니다.
+        </p>
+        <button type="button" id="introBtn" class="btn btn-white">
+          다른 소개 보기 👉
+        </button>
+      </div>
+
+      <!-- 오른쪽 그림: 이미지 파일 대신 CSS와 이모지로 표현 -->
+      <div class="hero-art" aria-hidden="true">
+        <div class="bubble">반가워요!</div>
+        <div class="scooter">👨‍💻</div>
+      </div>
+    </section>
+
+    <!-- 2-2. 카테고리 아이콘 : 누르면 아래 프로젝트가 걸러집니다 -->
+    <section class="category">
+      <h2 class="section-title">카테고리</h2>
+      <div class="category-grid">
+        <!-- data-filter 값으로 아래 프로젝트 카드를 걸러냅니다 -->
+        <button type="button" class="cat-item active" data-filter="all">
+          <span class="cat-icon">📁</span>전체
+        </button>
+        <button type="button" class="cat-item" data-filter="html">
+          <span class="cat-icon">🧱</span>HTML
+        </button>
+        <button type="button" class="cat-item" data-filter="css">
+          <span class="cat-icon">🎨</span>CSS
+        </button>
+        <button type="button" class="cat-item" data-filter="js">
+          <span class="cat-icon">⚡</span>JavaScript
+        </button>
+        <button type="button" class="cat-item" data-filter="soon">
+          <span class="cat-icon">⏳</span>준비중
+        </button>
+      </div>
+    </section>
+
+    <!-- 2-3. 프로젝트 목록 (카드형 레이아웃) -->
+    <section id="projects" class="menu">
+      <h2 class="section-title">Portfolio <small>프로젝트·과제</small></h2>
+
+      <div class="card-list">
+
+        <!-- 카드 1 : 첫 번째 홈페이지 -->
+        <article class="card" data-category="html css">
+          <div class="card-thumb thumb-mint">🏠</div>
+          <div class="card-body">
+            <span class="tag tag-best">과제</span>
+            <h3>나의 첫 홈페이지</h3>
+            <p class="card-desc">
+              Home·About·Portfolio·Contact 4개 페이지로 구성한 첫 홈페이지입니다.
+              HTML 기본 태그와 CSS 변수로 색상을 관리했습니다.
+            </p>
+            <p class="card-meta">🧱 HTML · 🎨 CSS</p>
+            <div class="card-actions">
+              <a class="btn btn-mint" href="https://github.com/toohotkimchii/kimnamyong_myhomepage" target="_blank" rel="noopener">GitHub 보기</a>
+              <button type="button" class="btn btn-line like-btn">♡ 좋아요</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 카드 2 : 지금 보고 있는 이 페이지 -->
+        <article class="card" data-category="html css js">
+          <div class="card-thumb thumb-yellow">🖥️</div>
+          <div class="card-body">
+            <span class="tag tag-new">NEW</span>
+            <h3>AI 활용 포트폴리오 페이지</h3>
+            <p class="card-desc">
+              지금 보고 계신 이 페이지입니다. AI에게 HTML → CSS → JS 순서로 요청하고
+              직접 검토·수정해서 완성했습니다.
+            </p>
+            <p class="card-meta">9주차 실습 · 🧱 HTML · 🎨 CSS · ⚡ JS</p>
+            <div class="card-actions">
+              <a class="btn btn-mint" href="https://github.com/toohotkimchii/kimnamyong_myhomepage/tree/main/toohotkimchii_page" target="_blank" rel="noopener">GitHub 보기</a>
+              <button type="button" class="btn btn-line like-btn">♡ 좋아요</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 카드 3 : 자바스크립트 기능 소개 -->
+        <article class="card" data-category="js">
+          <div class="card-thumb thumb-pink">🧪</div>
+          <div class="card-body">
+            <span class="tag">기능</span>
+            <h3>JavaScript 기능 모음</h3>
+            <p class="card-desc">
+              이 페이지에 들어간 기능들 — 소개 문구 바꾸기, 카테고리 필터,
+              검색, 좋아요, 연락 폼 확인 메시지.
+            </p>
+            <p class="card-meta">querySelector · addEventListener</p>
+            <div class="card-actions">
+              <a class="btn btn-mint" href="#contact">직접 써보기</a>
+              <button type="button" class="btn btn-line like-btn">♡ 좋아요</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 카드 4 : 준비 중 (앞으로 채울 자리) -->
+        <article class="card card-soon" data-category="soon">
+          <div class="card-thumb thumb-gray">🛠️</div>
+          <div class="card-body">
+            <span class="tag tag-soon">준비중</span>
+            <h3>다음 프로젝트</h3>
+            <p class="card-desc">
+              남은 학기 동안 만들 과제·프로젝트가 여기에 추가될 예정입니다.
+            </p>
+            <p class="card-meta">⏳ Coming soon</p>
+            <div class="card-actions">
+              <button type="button" class="btn btn-line" disabled>준비 중</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- 검색 결과가 없을 때 보여줄 문구 (평소엔 숨김) -->
+      <p id="emptyMsg" class="empty-msg" hidden>검색 결과가 없어요 😅</p>
+    </section>
+
+    <!-- 2-4. 자기소개 (About) -->
+    <section id="about" class="owner">
+      <h2 class="section-title">About Me</h2>
+      <div class="owner-card">
+        <div class="owner-face" aria-hidden="true">🙋‍♂️</div>
+        <div class="owner-info">
+          <h3>김남용</h3>
+          <p class="owner-sub">광운대학교 소프트웨어학부 22학번</p>
+          <ul class="owner-list">
+            <li><b>학력</b> 육민관고등학교 (2019 ~ 2021) → 광운대학교 (2022 ~ )</li>
+            <li><b>기술 스택</b> HTML · CSS · JavaScript</li>
+            <li><b>GitHub</b> <a href="https://github.com/toohotkimchii" target="_blank" rel="noopener">@toohotkimchii</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2-5. 제작 과정 (수업 내용 정리) -->
+    <section id="process" class="notice">
+      <h2 class="section-title">📢 제작 과정 <small>AI를 활용해 이렇게 만들었어요</small></h2>
+      <ol class="step-list">
+        <li><span class="step-num">1</span><div><b>주제 정하기</b><p>개인 포트폴리오 홈페이지</p></div></li>
+        <li><span class="step-num">2</span><div><b>시안 만들기</b><p>텍스트 프롬프트로 화면 구성 설명</p></div></li>
+        <li><span class="step-num">3</span><div><b>AI에게 요청</b><p>HTML → CSS → JavaScript 순서로 나눠서 요청</p></div></li>
+        <li><span class="step-num">4</span><div><b>실행 확인</b><p>브라우저에서 열어 오류·어색한 부분 점검</p></div></li>
+        <li><span class="step-num">5</span><div><b>직접 수정</b><p>색상, 여백, 문구, 기능을 직접 바꾸기</p></div></li>
+        <li><span class="step-num">6</span><div><b>설명 정리</b><p>사용한 프롬프트와 수정 내용은 README.md에 기록</p></div></li>
+      </ol>
+    </section>
+
+    <!-- 2-6. 연락처 (Contact) -->
+    <section id="contact" class="order">
+      <h2 class="section-title">Contact</h2>
+      <div class="order-box">
+        <p class="order-guide">
+          궁금한 점이 있으면 편하게 연락 주세요.<br />
+          이메일: <a href="mailto:nykim6350@naver.com">nykim6350@naver.com</a>
+        </p>
+
+        <!-- form : 실제 전송은 하지 않고, JS로 확인 메시지만 보여줍니다 -->
+        <form id="orderForm" class="order-form">
+          <label for="orderName">이름</label>
+          <input type="text" id="orderName" placeholder="이름을 입력하세요" />
+
+          <label for="orderMsg">메시지</label>
+          <textarea id="orderMsg" rows="4" placeholder="메시지를 입력하세요"></textarea>
+
+          <button type="submit" class="btn btn-mint btn-big">보내기</button>
+        </form>
+
+        <!-- 결과 메시지가 들어갈 자리 -->
+        <p id="orderResult" class="order-result" aria-live="polite"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 좋아요 개수를 보여주는 떠 있는 버튼 -->
+  <a href="#projects" class="cart-float" aria-label="좋아요 개수">
+    ♥ 좋아요 <span id="likeCount">0</span>
+  </a>
+
+  <!-- =====================================================
+       3. footer : 사이트 맨 아래 정보
+       ===================================================== -->
+  <footer class="site-footer">
+    <p class="footer-logo">김남용.</p>
+    <p>광운대학교 소프트웨어학부 · 인터넷활용 9주차 실습</p>
+    <p>&copy; <span id="year"></span> 김남용. 배달의민족 디자인 스타일을 참고한 개인 작품입니다.</p>
+  </footer>
+
+  <!-- 기능(JavaScript)은 script.js 파일에 작성했습니다. body 맨 끝에서 불러옵니다. -->
+  <script src="script.js"></script>
+</body>
+</html>
