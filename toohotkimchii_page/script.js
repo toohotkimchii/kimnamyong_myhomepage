@@ -6,10 +6,12 @@
 
 
 // -------------------------------------------------------------
-// 1. 버튼을 누르면 자기소개 문구가 바뀌는 기능 (수업 필수 기능)
+// 1. 이전(‹) / 다음(›) 버튼으로 자기소개 문구를 앞뒤로 넘기는 기능
 // -------------------------------------------------------------
 const introText = document.getElementById('introText');
-const introBtn = document.getElementById('introBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const introCounter = document.getElementById('introCounter');
 
 // 순서대로 보여줄 소개 문장들 (자유롭게 추가·수정하세요)
 const intros = [
@@ -18,43 +20,57 @@ const intros = [
   '요즘은 HTML·CSS·JavaScript로 홈페이지를 만들고 있습니다.',
   '아래 Contact에서 언제든 연락 주세요! 📮'
 ];
-let introIndex = 0; // 지금 몇 번째 문장인지 기억하는 변수
+let introIndex = 0; // 지금 몇 번째 문장인지 기억하는 변수 (0부터 시작)
 
-introBtn.addEventListener('click', function () {
+// n번째 문장을 화면에 보여주는 함수
+function showIntro(n) {
+  // 맨 앞에서 '이전'을 누르면 맨 뒤로, 맨 뒤에서 '다음'을 누르면 맨 앞으로
+  introIndex = (n + intros.length) % intros.length;
+
   introText.classList.add('fade'); // 잠깐 투명하게
-
   // 0.25초 뒤에 문장을 바꾸고 다시 보이게 함
   setTimeout(function () {
-    introIndex = (introIndex + 1) % intros.length; // 끝까지 가면 처음으로
     introText.textContent = intros[introIndex];
     introText.classList.remove('fade');
   }, 250);
+
+  // 사람이 보는 번호는 1부터 시작하므로 +1
+  introCounter.textContent = (introIndex + 1) + ' / ' + intros.length;
+}
+
+// 이전 버튼: 한 칸 뒤로
+prevBtn.addEventListener('click', function () {
+  showIntro(introIndex - 1);
 });
+
+// 다음 버튼: 한 칸 앞으로
+nextBtn.addEventListener('click', function () {
+  showIntro(introIndex + 1);
+});
+
+// 처음 열었을 때 번호를 문장 개수에 맞게 표시
+introCounter.textContent = '1 / ' + intros.length;
 
 
 // -------------------------------------------------------------
-// 2. 카테고리 필터 + 검색 기능
-//    두 조건을 모두 만족하는 카드만 보여줍니다.
+// 2. 카테고리 필터 기능
+//    선택한 카테고리에 해당하는 카드만 보여줍니다.
 // -------------------------------------------------------------
 const catButtons = document.querySelectorAll('.cat-item');
 const cards = document.querySelectorAll('.card');
-const searchInput = document.getElementById('searchInput');
 const emptyMsg = document.getElementById('emptyMsg');
 
 let currentFilter = 'all'; // 현재 선택된 카테고리
 
 function updateCards() {
-  const keyword = searchInput.value.trim().toLowerCase();
   let visibleCount = 0;
 
   cards.forEach(function (card) {
     // data-category="html css" → 카테고리 확인
     const matchCategory =
       currentFilter === 'all' || card.dataset.category.includes(currentFilter);
-    // 카드 안의 글자에 검색어가 들어있는지 확인
-    const matchKeyword = card.textContent.toLowerCase().includes(keyword);
 
-    if (matchCategory && matchKeyword) {
+    if (matchCategory) {
       card.classList.remove('hide');
       visibleCount++;
     } else {
@@ -74,15 +90,6 @@ catButtons.forEach(function (btn) {
     currentFilter = btn.dataset.filter;
     updateCards();
   });
-});
-
-// 검색창에 글자를 입력할 때마다 카드 다시 걸러내기
-searchInput.addEventListener('input', function () {
-  updateCards();
-  // 검색을 시작하면 프로젝트 영역으로 화면 이동
-  if (searchInput.value.length === 1) {
-    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-  }
 });
 
 
@@ -139,3 +146,18 @@ orderForm.addEventListener('submit', function (event) {
 // 5. 푸터의 연도 자동 표시 (기존 홈페이지와 같은 기능)
 // -------------------------------------------------------------
 document.getElementById('year').textContent = new Date().getFullYear();
+
+
+// -------------------------------------------------------------
+// 6. 상단 메뉴: 누른 메뉴에 흰색 배경(active 클래스) 표시
+// -------------------------------------------------------------
+const navLinks = document.querySelectorAll('.main-nav a');
+
+navLinks.forEach(function (link) {
+  link.addEventListener('click', function () {
+    // 모든 메뉴에서 active를 지우고
+    navLinks.forEach(function (l) { l.classList.remove('active'); });
+    // 지금 누른 메뉴에만 active 추가
+    link.classList.add('active');
+  });
+});
